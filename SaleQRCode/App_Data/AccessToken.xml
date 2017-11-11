@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WeChat>
+  <AccessToken>wnmaC7s4eGcZsBseT24hIoKAtMAUClvQ4a0lpl5HO_bU3UuJaQ-BAhplvyERaVOwRuD3aBscqJs21iMaZdNAAMTsphIwT_OB_FP8QIpPy3kTEYjACAITN</AccessToken>
+  <!--expires_in 是时间格式-->
+  <Expires>2017-11-11 17:29:05</Expires>
+</WeChat>
