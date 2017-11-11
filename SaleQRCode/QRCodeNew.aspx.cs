@@ -6,7 +6,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using FROST.Utility;
 using FROST.WeixinMP;
-
 using FROST.WeixinMP.AdvancedAPI.Ticket;
 
 namespace SaleQRCode {

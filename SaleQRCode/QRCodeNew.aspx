@@ -5,5 +5,5 @@
     生成二维码
     <p><%=accessToken %></p>
     <p><%=ticket.ticket %></p>
-    <img style="border:1px solid silver;background:#DEDEDE;padding:4px;" src="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=<%=ticket.ticket %>" alt="Alternate Text" />
+    <img style="border:1px solid silver;background:#DEDEDE;padding:4px;" src="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=<%=ticket.ticket %>" alt="AlternateText" />
 </asp:Content>
