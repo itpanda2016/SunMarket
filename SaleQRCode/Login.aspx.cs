@@ -14,6 +14,7 @@ namespace SaleQRCode {
             if (Session["loginid"] != null)
                 Response.Redirect("Main.aspx");
             if (Request["loginPassword"] != null) {
+                WeChat.AccessTokenContainer.GetAccessToken();
                 if (Request["loginPassword"].Trim() == "weizhi12") {
                     Session.Add("loginid", DateTime.Now);
                     Response.Redirect("Main.aspx");

@@ -74,6 +74,8 @@
     <Content Include="Controllers\WeChat\Signature.ashx" />
     <Content Include="Controllers\WeChat\HandlerIO.ashx" />
     <None Include="packages.config" />
+    <Content Include="SalerList.aspx" />
+    <Content Include="SalerNew.aspx" />
     <Content Include="Scripts\bootstrap-3.3.5-dist\css\bootstrap-theme.css.map" />
     <Content Include="Scripts\bootstrap-3.3.5-dist\css\bootstrap.css.map" />
     <Content Include="Scripts\bootstrap-3.3.5-dist\fonts\glyphicons-halflings-regular.eot" />
@@ -81,6 +83,7 @@
     <Content Include="Scripts\bootstrap-3.3.5-dist\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Scripts\bootstrap-3.3.5-dist\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="readme.md" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -116,6 +119,8 @@
     <Compile Include="Content\Master\SiteAdmin.Master.designer.cs">
       <DependentUpon>SiteAdmin.Master</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\QRCodeController.cs" />
+    <Compile Include="Controllers\SalerController.cs" />
     <Compile Include="Controllers\WeChat\AccessTokenContainer.cs" />
     <Compile Include="Controllers\WeChat\HandlerIO.ashx.cs">
       <DependentUpon>HandlerIO.ashx</DependentUpon>
@@ -144,6 +149,8 @@
     <Compile Include="Message.aspx.designer.cs">
       <DependentUpon>Message.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\CRMSaler.cs" />
+    <Compile Include="Models\WeChatQRCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QRCodeList.aspx.cs">
       <DependentUpon>QRCodeList.aspx</DependentUpon>
@@ -159,10 +166,22 @@
     <Compile Include="QRCodeNew.aspx.designer.cs">
       <DependentUpon>QRCodeNew.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SalerList.aspx.cs">
+      <DependentUpon>SalerList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SalerList.aspx.designer.cs">
+      <DependentUpon>SalerList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SalerNew.aspx.cs">
+      <DependentUpon>SalerNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SalerNew.aspx.designer.cs">
+      <DependentUpon>SalerNew.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\FROST\FROST.Utility\FROST.Utility.csproj">
       <Project>{7cb9cd70-f6c2-4381-ab44-3f71d9c6e165}</Project>

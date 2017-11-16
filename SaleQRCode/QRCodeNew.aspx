@@ -2,8 +2,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    生成二维码
-    <p><%=accessToken %></p>
-    <p><%=ticket.ticket %></p>
-    <img style="border:1px solid silver;background:#DEDEDE;padding:4px;" src="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=<%=ticket.ticket %>" alt="AlternateText" />
+    <h2>添加二维码</h2>
+    <p>添加成功后，将跳转到列表界面，根据Ticket来获取二维码图片</p>
+    <form action="QRCodeNew.aspx" method="post">
+        <%--<div>
+            <label>输入添加二维码数量：</label>
+            <input type="number" name="qrcode_number" class="form-control" value="1" />
+        </div>--%>
+        <input type="submit" name="btnSubmit" value="添加" />
+    </form>
 </asp:Content>
