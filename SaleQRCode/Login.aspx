@@ -17,7 +17,7 @@
 
             <div class="form-group">
                 <label for="loginPassword">输入口令</label>
-                <input class="form-control" id="loginPassword" type="password" name="loginPassword" value="weizhi12" />
+                <input class="form-control" id="loginPassword" type="password" name="loginPassword" value="" />
             </div>
             <input class="form-control btn btn-success" type="submit" id="btnLogin" value="确定" />
             <br />
@@ -25,7 +25,7 @@
                 <label runat="server" id="lbMsg"></label>
             </div>
         </form>
-        <%--<div><a style="color:#b2b2b2" href="http://www.weizhi12.com" target="_blank">微知一二</a></div>--%>
+        <div><a style="color:#b2b2b2" href="http://www.weizhi12.com" target="_blank">微知一二</a></div>
     </div>
 </body>
 </html>

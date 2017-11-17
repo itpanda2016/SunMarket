@@ -71,9 +71,9 @@
   <ItemGroup>
     <Content Include="App_Data\AccessToken.xml" />
     <Content Include="Content\Master\SiteAdmin.Master" />
-    <Content Include="Controllers\WeChat\Signature.ashx" />
     <Content Include="Controllers\WeChat\HandlerIO.ashx" />
     <None Include="packages.config" />
+    <Content Include="SalerEdit.aspx" />
     <Content Include="SalerList.aspx" />
     <Content Include="SalerNew.aspx" />
     <Content Include="Scripts\bootstrap-3.3.5-dist\css\bootstrap-theme.css.map" />
@@ -83,6 +83,7 @@
     <Content Include="Scripts\bootstrap-3.3.5-dist\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Scripts\bootstrap-3.3.5-dist\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="readme.md" />
+    <None Include="Properties\PublishProfiles\AliYun.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -125,9 +126,6 @@
     <Compile Include="Controllers\WeChat\HandlerIO.ashx.cs">
       <DependentUpon>HandlerIO.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\WeChat\Signature.ashx.cs">
-      <DependentUpon>Signature.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -165,6 +163,13 @@
     </Compile>
     <Compile Include="QRCodeNew.aspx.designer.cs">
       <DependentUpon>QRCodeNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SalerEdit.aspx.cs">
+      <DependentUpon>SalerEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SalerEdit.aspx.designer.cs">
+      <DependentUpon>SalerEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="SalerList.aspx.cs">
       <DependentUpon>SalerList.aspx</DependentUpon>

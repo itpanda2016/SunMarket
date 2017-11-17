@@ -7,8 +7,7 @@ using System.Web.UI.WebControls;
 using FROST.Utility;
 using FROST.WeixinMP;
 using FROST.WeixinMP.AdvancedAPI.Ticket;
-using SaleQRCode.Controllers;
-using SaleQRCode.Models;
+
 using WeChat;
 
 namespace SaleQRCode {

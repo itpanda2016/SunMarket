@@ -10,7 +10,7 @@ namespace SaleQRCode {
     public partial class QRCodeList : System.Web.UI.Page {
         public DataTable dt = new DataTable();
         protected void Page_Load(object sender, EventArgs e) {
-            dt = Controllers.QRCodeController.GetList();
+            dt = QRCodeController.GetList();
             if(dt != null) {
                 rptList.DataSource = dt;
                 rptList.DataBind();

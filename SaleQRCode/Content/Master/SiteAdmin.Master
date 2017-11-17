@@ -31,20 +31,21 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li <%if (activeMenu.IndexOf("Main.aspx") >= 0) { %> class="active" <% }%>><a href="Main.aspx">首页<span class="sr-only">(current)</span></a></li>
-        <li <%if (activeMenu.IndexOf("SiteConfig.aspx") >= 0) { %> class="active" <% }%>><a href="SiteConfig.aspx">系统设置</a></li>
-        <li <%if (activeMenu.IndexOf("Log.aspx") >= 0) { %> class="active" <% }%>><a href="Log.aspx">发送日志</a></li>
+        <li <%if (activeMenu.IndexOf("SalerList.aspx") >= 0 || activeMenu.IndexOf("SalerNew.aspx") >= 0) { %> class="active" <% }%>><a href="SalerList.aspx">营销员管理</a></li>
+        <li <%if (activeMenu.IndexOf("QRCodeList.aspx") >= 0 || activeMenu.IndexOf("QRCodeNew.aspx") >= 0) { %> class="active" <% }%>><a href="QRCodeList.aspx">二维码管理</a></li>
+      
       </ul>
-        <ul class="nav navbar-nav">
+
+        <%--<ul class="nav navbar-nav">
             <li class="dropdown">
                 <a href="/My" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">二维码管理<span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <%--<li><a href="Profile.aspx">修改密码</a></li>--%>
                     <li <%if (activeMenu.IndexOf("QRCodeList.aspx") >= 0) { %> class="active" <% }%>><a href="QRCodeList.aspx">二维码清单</a></li>
                     <li role="separator" class="divider"></li>
                     <li <%if (activeMenu.IndexOf("QRCodeNew.aspx") >= 0) { %> class="active" <% }%>><a href="QRCodeNew.aspx">添加二维码</a></li>
                 </ul>
             </li>
-        </ul>
+        </ul>--%>
 <%--      <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">

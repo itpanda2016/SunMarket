@@ -14,14 +14,14 @@ namespace SaleQRCode {
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static bool Add(CRMSaler model) {
+        public static bool Add(Saler model) {
             StringBuilder sb = new StringBuilder();
             sb.Append("Insert into crm_saler (name,mobile,status,gmt_create,qrcode_id) " +
-                "values (@activityName,@status,@startTime,@endTime,@tagId,@gmtCreate,@qrcode_id)");
+                "values (@name,@mobile,@status,@gmtCreate,@qrcode_id)");
             SqlParameter[] parameter = {
-                new SqlParameter("@activityName", model.Name),
+                new SqlParameter("@name", model.Name),
                 new SqlParameter("@status",model.Status),
-                new SqlParameter("@startTime",model.Mobile),
+                new SqlParameter("@mobile",model.Mobile),
                 new SqlParameter("@qrcode_id",model.QRCodeId),
                 new SqlParameter("@gmtCreate",DateTime.Now)
                 };
@@ -33,27 +33,41 @@ namespace SaleQRCode {
         /// <summary>
         /// 判断手机号码是否已存在
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="mobile"></param>
         /// <returns></returns>
-        public static bool IsHaveByMobile(CRMSaler model) {
+        public static bool Check(string mobile) {
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("select count(*) from crm_saler where mboile ='{0}'", model.Mobile);
+            sb.AppendFormat("select count(*) from crm_saler where mobile ='{0}'",mobile);
+            int ret = Convert.ToInt32(MsSQLHelper.ExecuteScalar(sb.ToString()));
+            if (ret > 0)
+                return true;
+            return false;
+        }
+        /// <summary>
+        /// 判断手机号码是否已存在
+        /// </summary>
+        /// <param name="mobile"></param>
+        /// <returns></returns>
+        public static bool Check(int id) {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("select count(*) from crm_saler where id ={0}", id);
             int ret = Convert.ToInt32(MsSQLHelper.ExecuteScalar(sb.ToString()));
             if (ret > 0)
                 return true;
             return false;
         }
 
-        public static CRMSaler Get(int id) {
+        public static Saler Get(int id) {
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("select id,name,mobile,status,gmt_create,gmt_modified,qrcode_id" +
                 " from crm_saler where id = {0}", id);
             SqlDataReader reader = MsSQLHelper.ExecuteReader(sb.ToString());
-            CRMSaler model = new CRMSaler();
+            Saler model = new Saler();
             if (reader.Read()) {
                 model.Id = id;
-                model.Name = reader["activity_name"].ToString();
+                model.Name = reader["name"].ToString();
                 model.Status = Convert.ToInt32(reader["status"]);
+                model.Mobile = reader["mobile"].ToString();
                 model.GMTCreate = Convert.ToDateTime(reader["gmt_create"]);
                 if (reader["qrcode_id"] != DBNull.Value)
                     model.QRCodeId = Convert.ToInt32(reader["qrcode_id"]);
@@ -64,7 +78,7 @@ namespace SaleQRCode {
             return null;
         }
 
-        public static bool Update(CRMSaler model) {
+        public static bool Update(Saler model) {
             StringBuilder sb = new StringBuilder();
             sb.Append("update crm_saler set ");
             sb.Append("name = @name,status = @status,");
