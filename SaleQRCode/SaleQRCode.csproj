@@ -48,6 +48,10 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="mysql.data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Downloads\mysql-for-visualstudio-1.2.7-noinstall\v45\mysql.data.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -73,6 +77,8 @@
     <Content Include="Content\Master\SiteAdmin.Master" />
     <Content Include="Controllers\WeChat\HandlerIO.ashx" />
     <None Include="packages.config" />
+    <Content Include="CustomerList.aspx" />
+    <Content Include="SaleQRCode\Index.aspx" />
     <Content Include="SalerEdit.aspx" />
     <Content Include="SalerList.aspx" />
     <Content Include="SalerNew.aspx" />
@@ -120,11 +126,19 @@
     <Compile Include="Content\Master\SiteAdmin.Master.designer.cs">
       <DependentUpon>SiteAdmin.Master</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\CustomerControllers.cs" />
     <Compile Include="Controllers\QRCodeController.cs" />
     <Compile Include="Controllers\SalerController.cs" />
     <Compile Include="Controllers\WeChat\AccessTokenContainer.cs" />
     <Compile Include="Controllers\WeChat\HandlerIO.ashx.cs">
       <DependentUpon>HandlerIO.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerList.aspx.cs">
+      <DependentUpon>CustomerList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerList.aspx.designer.cs">
+      <DependentUpon>CustomerList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -148,6 +162,7 @@
       <DependentUpon>Message.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\CRMSaler.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\WeChatQRCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QRCodeList.aspx.cs">
@@ -163,6 +178,13 @@
     </Compile>
     <Compile Include="QRCodeNew.aspx.designer.cs">
       <DependentUpon>QRCodeNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SaleQRCode\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SaleQRCode\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
     <Compile Include="SalerEdit.aspx.cs">
       <DependentUpon>SalerEdit.aspx</DependentUpon>

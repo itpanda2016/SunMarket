@@ -77,7 +77,13 @@ namespace SaleQRCode {
             }
             return null;
         }
-
+        public static int GetId(int qrcodeId) {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("select id" +
+                " from crm_saler where qrcode_id = {0}", qrcodeId);
+            int ret = Convert.ToInt32(MsSQLHelper.ExecuteScalar(sb.ToString()));
+            return ret;
+        }
         public static bool Update(Saler model) {
             StringBuilder sb = new StringBuilder();
             sb.Append("update crm_saler set ");

@@ -6,6 +6,8 @@ using System.Xml;
 using System.Xml.Linq;
 using FROST.Utility;
 using System.Configuration;
+using System.Text;
+using SaleQRCode;
 
 namespace SaleQRCode.Controllers.WeChat {
     /// <summary>
@@ -19,8 +21,6 @@ namespace SaleQRCode.Controllers.WeChat {
             context.Response.ContentType = "text/plain";
             TxtLogHelper logHelper = new TxtLogHelper(context.Server.MapPath("~/App_Data/"));
             logHelper.Info("创建日志：" + DateTime.Now.ToString());
-            //context.Response.Write("Hello World");
-            //context.Response.End();
             if (context.Request.HttpMethod== "POST") {
                 logHelper.Info("进入POST事件");
                 XmlReader reader = XmlReader.Create(context.Request.InputStream);
@@ -28,6 +28,8 @@ namespace SaleQRCode.Controllers.WeChat {
                 XElement xe = xDocument.Element("xml");
                 string fromOpenid = xe.Element("FromUserName").Value;
                 string toOpenid = xe.Element("ToUserName").Value;
+                string msgType = xe.Element("MsgType").Value;
+
                 logHelper.Info("获取到fromOpenid：" + fromOpenid + "，以及toOpenid：" + toOpenid);
                 string strRespose = "<xml>";
                 strRespose += "<ToUserName><![CDATA[{0}]]></ToUserName>";
@@ -36,9 +38,38 @@ namespace SaleQRCode.Controllers.WeChat {
                 strRespose += "<MsgType><![CDATA[text]]></MsgType>";
                 strRespose += "<Content><![CDATA[{3}]]></Content>";
                 strRespose += "</xml>";
+                StringBuilder defReturn = new StringBuilder();
+                defReturn.Append("终于等到你！感谢您关注：阳光菜篮\n");
+                defReturn.Append("阳光菜篮商贸有限公司商城是坚持让“老百姓种的菜始终在餐桌上”“把菜市场搬到家里”的绿色健康方便快捷的理念，立足于德阳本地，与各安全的食品生产基地签订合作协议，严控各类生鲜产品的质量，完善采购渠道，完整配送体系，用优质的售后服务，以保证让每个顾客花最少的钱而买到最优质的生鲜产品，享受到亲切的一站式服务。\n");
+                defReturn.Append("我们提供生鲜网上配送服务：\n");
+                defReturn.Append("我公司主营业；时令水果 时令蔬菜 家禽肉类\n");
+                defReturn.Append("粮油调料 酒水饮料 休闲食品等\n");
+                defReturn.Append("客服电话：0838 - 3203899\n");
 
-                context.Response.Write(string.Format(strRespose, fromOpenid, toOpenid, DateTime.Now.ToBinary(),
-                    "感谢您的关注或回复。"));
+                if (msgType == "text") {
+                    //context.Response.Write(string.Format(strRespose, fromOpenid, toOpenid, DateTime.Now.ToBinary(),defReturn.ToString()));
+                }else if(msgType == "event") {
+                    string eventKey = xe.Element("EventKey").Value.Replace("qrscene_","");
+                    string eventType = xe.Element("Event").Value;
+                    if(eventType == "subscribe") {
+                        defReturn.Clear();
+                        Customer customer = new Customer();
+                        customer.Openid = fromOpenid;
+                        customer.SalerId = SalerController.GetId(Convert.ToInt32(eventKey));
+                        customer.QRCodeId = Convert.ToInt32(eventKey);
+                        customer.FollowTime = DateTime.Now;
+                        if (CustomerControllers.Add(customer)) {
+                            defReturn.Append("感谢关注，您绑定ID为：" + customer.SalerId + "，来自二维码：" + customer.QRCodeId);
+                        }
+                        else {
+                            defReturn.Append("关注失败。");
+                        }
+                    }
+                }
+                else {
+                    //context.Response.Write(string.Format(strRespose, fromOpenid, toOpenid, DateTime.Now.ToBinary(), defReturn.ToString()));
+                }
+                context.Response.Write(string.Format(strRespose, fromOpenid, toOpenid, DateTime.Now.ToBinary(), defReturn.ToString()));
                 logHelper.Info("完成消息回复。");
             }
             else if(context.Request.HttpMethod == "GET") {
