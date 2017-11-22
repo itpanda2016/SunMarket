@@ -28,7 +28,10 @@
                 <td><%# Eval("mobile") %></td>
                 <td><%# Eval("qrcode_id") %></td>
                 <td><%# Eval("状态") %></td>
-                <td><a href="SalerEdit.aspx?id=<%# Eval("id") %>">修改</a></td>
+                <td>
+                    <a href="SalerEdit.aspx?id=<%# Eval("id") %>">修改</a>
+                    <a href="SalerList.aspx?id=<%# Eval("id") %>" onclick="return confirm('是否确定删除？（不可撤消操作）');">删除</a>
+                </td>
             </tr>
         </ItemTemplate>
         <FooterTemplate>

@@ -10,7 +10,7 @@
 namespace SaleQRCode {
     
     
-    public partial class CustomerList {
+    public partial class CustomerAmount {
         
         /// <summary>
         /// rptList 控件。

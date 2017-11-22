@@ -8,6 +8,8 @@ using FROST.Utility;
 using System.Configuration;
 using System.Text;
 using SaleQRCode;
+using FROST.WeixinMP;
+using WeChat;
 
 namespace SaleQRCode.Controllers.WeChat {
     /// <summary>
@@ -51,17 +53,33 @@ namespace SaleQRCode.Controllers.WeChat {
                 }else if(msgType == "event") {
                     string eventKey = xe.Element("EventKey").Value.Replace("qrscene_","");
                     string eventType = xe.Element("Event").Value;
+                    logHelper.Info("事件类型：" + eventType);
                     if(eventType == "subscribe") {
                         defReturn.Clear();
+                        logHelper.Info("开始获取用户信息：" + DateTime.Now);
+                        MemberResult result = new MemberResult();
+                        result = MailListApi.GetMemberInfo(fromOpenid,AccessTokenContainer.GetAccessToken());
+                        logHelper.Info("获取结果：" + result.nickname);
                         Customer customer = new Customer();
                         customer.Openid = fromOpenid;
                         customer.SalerId = SalerController.GetId(Convert.ToInt32(eventKey));
                         customer.QRCodeId = Convert.ToInt32(eventKey);
-                        customer.FollowTime = DateTime.Now;
+                        customer.SubscribeTime = DateTime.Now;
+                        customer.Headimgurl = result.headimgurl;
+                        customer.NickName = result.nickname;
+                        customer.Subscribe = result.subscribe;
+                        logHelper.Info("赋值完成，customer.headimgurl" + customer.Headimgurl);
+                        logHelper.Info(customer.Subscribe.ToString());
+                        logHelper.Info(customer.QRCodeId.ToString());
+                        logHelper.Info(customer.Openid);
+                        logHelper.Info(customer.NickName);
+                        logHelper.Info(customer.SubscribeTime.ToString());
                         if (CustomerControllers.Add(customer)) {
+                            logHelper.Info("添加成功。");
                             defReturn.Append("感谢关注，您绑定ID为：" + customer.SalerId + "，来自二维码：" + customer.QRCodeId);
                         }
                         else {
+                            logHelper.Info("添加失败。");
                             defReturn.Append("关注失败。");
                         }
                     }

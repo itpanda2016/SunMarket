@@ -77,6 +77,7 @@
     <Content Include="Content\Master\SiteAdmin.Master" />
     <Content Include="Controllers\WeChat\HandlerIO.ashx" />
     <None Include="packages.config" />
+    <Content Include="CustomerAmount.aspx" />
     <Content Include="CustomerList.aspx" />
     <Content Include="SaleQRCode\Index.aspx" />
     <Content Include="SalerEdit.aspx" />
@@ -132,6 +133,13 @@
     <Compile Include="Controllers\WeChat\AccessTokenContainer.cs" />
     <Compile Include="Controllers\WeChat\HandlerIO.ashx.cs">
       <DependentUpon>HandlerIO.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerAmount.aspx.cs">
+      <DependentUpon>CustomerAmount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerAmount.aspx.designer.cs">
+      <DependentUpon>CustomerAmount.aspx</DependentUpon>
     </Compile>
     <Compile Include="CustomerList.aspx.cs">
       <DependentUpon>CustomerList.aspx</DependentUpon>

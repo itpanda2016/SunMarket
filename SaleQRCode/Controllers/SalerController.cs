@@ -117,5 +117,17 @@ namespace SaleQRCode {
                 return table;
             return null;
         }
+        /// <summary>
+        /// 删除（如果已关联二维码，不允许删除）
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static bool Delete(int id) {
+            string sb = "delete from crm_saler where (qrcode_id = 0 or qrcode_id = '') and id=" + id;
+            int ret = MsSQLHelper.ExecuteNonQuery(sb);
+            if (ret > 0)
+                return true;
+            return false;
+        }
     }
 }

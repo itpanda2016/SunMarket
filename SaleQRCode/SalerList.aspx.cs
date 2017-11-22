@@ -9,7 +9,18 @@ using System.Data;
 namespace SaleQRCode {
     public partial class SalerList : System.Web.UI.Page {
         public DataTable dt = new DataTable();
+        public int id;
         protected void Page_Load(object sender, EventArgs e) {
+            if (!string.IsNullOrEmpty(Request["id"])) {
+                id = Convert.ToInt32(Request["id"].Trim());
+                if (SalerController.Delete(id)) {
+                    Message.Dialog("删除成功。" + id, "/SalerList.aspx");
+                }
+                else {
+                    Message.Dialog("删除失败。");
+                }
+                
+            }
             dt = SalerController.Get();
             if (dt != null) {
                 dt.Columns.Add("状态",typeof(string));

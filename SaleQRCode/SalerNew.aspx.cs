@@ -9,10 +9,11 @@ using FROST.Utility;
 namespace SaleQRCode {
     public partial class SalerNew : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
-            if(Request["salerName"] != null && Request["salerMobile"]!=null && Request["qrcodeId"] != null) {
+            if(Request["salerName"] != null && Request["salerMobile"]!=null) {
                 Saler saler = new Saler();
                 saler.Name = Request["salerName"].Trim();
-                saler.QRCodeId = Convert.ToInt32(Request["qrcodeId"].Trim());
+                if (!string.IsNullOrEmpty(Request["qrcodeId"]))
+                    saler.QRCodeId = Convert.ToInt32(Request["qrcodeId"].Trim());
                 if (!General.CheckMobilePhone(Request["salerMobile"].Trim())) {
                     Message.Dialog("手机号码不正确。");
                     return;

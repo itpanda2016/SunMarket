@@ -77,7 +77,8 @@ namespace SaleQRCode {
         /// <returns></returns>
         public static DataTable GetList() {
             StringBuilder sb = new StringBuilder();
-            sb.Append("select id, gmt_create, gmt_modified, qrcode_type, scene_id, scene_str, expire_seconds, ticket from wechat_qrcode");
+            sb.Append("select a.id, a.gmt_create,b.id as saler_id,b.name as saler_name,qrcode_type, scene_id, scene_str, expire_seconds, ticket from wechat_qrcode as a");
+            sb.Append(" left join crm_saler as b on a.id = b.qrcode_id");
             DataTable table = MsSQLHelper.ExecuteDataTable(sb.ToString());
             if (table.Rows.Count > 0)
                 return table;

@@ -33,7 +33,7 @@
         <li <%if (activeMenu.IndexOf("Main.aspx") >= 0) { %> class="active" <% }%>><a href="Main.aspx">首页<span class="sr-only">(current)</span></a></li>
         <li <%if (activeMenu.IndexOf("SalerList.aspx") >= 0 || activeMenu.IndexOf("SalerNew.aspx") >= 0) { %> class="active" <% }%>><a href="SalerList.aspx">营销员管理</a></li>
         <li <%if (activeMenu.IndexOf("QRCodeList.aspx") >= 0 || activeMenu.IndexOf("QRCodeNew.aspx") >= 0) { %> class="active" <% }%>><a href="QRCodeList.aspx">二维码管理</a></li>
-      
+        <li <%if (activeMenu.IndexOf("CustomerList.aspx") >= 0 || activeMenu.IndexOf("CustomerList.aspx") >= 0) { %> class="active" <% }%>><a href="CustomerList.aspx">粉丝管理</a></li>
       </ul>
 
         <%--<ul class="nav navbar-nav">
