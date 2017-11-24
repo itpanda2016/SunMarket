@@ -22,9 +22,7 @@ namespace SaleQRCode.Controllers.WeChat {
         public void ProcessRequest(HttpContext context) {
             context.Response.ContentType = "text/plain";
             TxtLogHelper logHelper = new TxtLogHelper(context.Server.MapPath("~/App_Data/"));
-            logHelper.Info("创建日志：" + DateTime.Now.ToString());
             if (context.Request.HttpMethod== "POST") {
-                logHelper.Info("进入POST事件");
                 XmlReader reader = XmlReader.Create(context.Request.InputStream);
                 XDocument xDocument = XDocument.Load(reader);
                 XElement xe = xDocument.Element("xml");
@@ -32,7 +30,7 @@ namespace SaleQRCode.Controllers.WeChat {
                 string toOpenid = xe.Element("ToUserName").Value;
                 string msgType = xe.Element("MsgType").Value;
 
-                logHelper.Info("获取到fromOpenid：" + fromOpenid + "，以及toOpenid：" + toOpenid);
+                
                 string strRespose = "<xml>";
                 strRespose += "<ToUserName><![CDATA[{0}]]></ToUserName>";
                 strRespose += "<FromUserName><![CDATA[{1}]]></FromUserName>";
@@ -68,20 +66,30 @@ namespace SaleQRCode.Controllers.WeChat {
                         customer.Headimgurl = result.headimgurl;
                         customer.NickName = result.nickname;
                         customer.Subscribe = result.subscribe;
-                        logHelper.Info("赋值完成，customer.headimgurl" + customer.Headimgurl);
-                        logHelper.Info(customer.Subscribe.ToString());
-                        logHelper.Info(customer.QRCodeId.ToString());
-                        logHelper.Info(customer.Openid);
-                        logHelper.Info(customer.NickName);
-                        logHelper.Info(customer.SubscribeTime.ToString());
-                        if (CustomerControllers.Add(customer)) {
-                            logHelper.Info("添加成功。");
-                            defReturn.Append("感谢关注，您绑定ID为：" + customer.SalerId + "，来自二维码：" + customer.QRCodeId);
+                        logHelper.Info(string.Format("获取结果正常不：{0}、{1}、{2}", customer.SalerId, customer.Headimgurl, customer.Subscribe));
+                        if (CustomerControllers.IsHave(fromOpenid)) {
+                            logHelper.Info("判断用否已存在，准备更新。");
+                            if (CustomerControllers.Update(customer)) {
+                                defReturn.Append("感谢关注，您绑定的ID为：" + customer.SalerId + "，来自二维码：" + customer.QRCodeId);
+                                logHelper.Info("更新成功。");
+                            }
+                            else {
+                                logHelper.Info("更新失败了。");
+                            }
                         }
                         else {
-                            logHelper.Info("添加失败。");
-                            defReturn.Append("关注失败。");
+                            if (CustomerControllers.Add(customer)) {
+                                logHelper.Info("添加成功。");
+                                defReturn.Append("感谢关注，您绑定ID为：" + customer.SalerId + "，来自二维码：" + customer.QRCodeId);
+                            }
+                            else {
+                                logHelper.Info("添加失败。");
+                            }
                         }
+                    }else if(eventType == "unsubscribe") {
+                        logHelper.Info("开始更新取消状态时的状态。");
+                        CustomerControllers.Update(fromOpenid, 0);
+                        logHelper.Info("更新成功。");
                     }
                 }
                 else {

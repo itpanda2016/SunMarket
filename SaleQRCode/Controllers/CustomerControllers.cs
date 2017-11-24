@@ -55,5 +55,56 @@ namespace SaleQRCode {
             int ret = Convert.ToInt32(MsSQLHelper.ExecuteScalar(sb));
             return ret;
         }
+        /// <summary>
+        /// 更新粉丝状态（0-取消关注，1-关注状态）
+        /// </summary>
+        /// <param name="openid"></param>
+        /// <param name="subscribe"></param>
+        /// <returns></returns>
+        public static bool Update(string openid,int subscribe) {
+            string sb = string.Format("update crm_customer set subscribe ={0} where openid='{1}'", subscribe, openid);
+            int ret = MsSQLHelper.ExecuteNonQuery(sb);
+            if (ret >= 1)
+                return true;
+            return false;
+        }
+        /// <summary>
+        /// 查询粉丝是否存在
+        /// </summary>
+        /// <param name="openid"></param>
+        /// <returns></returns>
+        public static bool IsHave(string openid) {
+            string sb = string.Format("select count(*) from crm_customer where openid='{0}'", openid);
+            int ret = Convert.ToInt32(MsSQLHelper.ExecuteScalar(sb));
+            if (ret > 0)
+                return true;
+            return false;
+        }
+        /// <summary>
+        /// 粉丝再次关注时，更新数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public static bool Update(Customer model) {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("update crm_customer set ");
+            sb.Append("saler_id = @salerid,gmt_modified = @gmtModified,");
+            sb.Append("qrcode_id = @qrcodeid,subscribe=@subscribe,");
+            sb.Append("nickname = @nickname,headimgurl=@headimgurl");
+            sb.Append(" where openid = @openid");
+            SqlParameter[] parameter = {
+                new SqlParameter("@salerid",model.SalerId),
+                new SqlParameter("@gmtModified",DateTime.Now),
+                new SqlParameter("@qrcodeid",model.QRCodeId),
+                new SqlParameter("@subscribe",model.Subscribe),
+                new SqlParameter("@nickname",model.NickName),
+                new SqlParameter("@headimgurl",model.Headimgurl),
+                new SqlParameter("@openid",model.Openid)
+            };
+            int ret = MsSQLHelper.ExecuteNonQuery(sb.ToString(), CommandType.Text, parameter);
+            if (ret == 0)
+                return false;
+            return true;
+        }
     }
 }

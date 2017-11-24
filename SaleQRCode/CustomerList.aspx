@@ -4,12 +4,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>粉丝列表</h1>
-    <p>需要把头像、昵称、关注状态显示出来，包括来源二维码、营销员ID、姓名</p>
-    <p>正常情况下可直接打开，看到所有的粉丝列表</p>
-    <p>或者是通过营销员ID连接进入，查看指定的粉丝列表</p>
-
-    <p>取消unsubscribe事件，更新openid用户的状态为未关注，并清除营销员ID（或者直接删除）</p>
-    <p>再次关注时，如果已存在openid，则更新状态、营销员ID</p>
 
     <asp:Repeater ID="rptList" runat="server">
         <HeaderTemplate>
