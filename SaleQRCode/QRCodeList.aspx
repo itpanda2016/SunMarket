@@ -3,10 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>二维码清单</h1>
-    <p>
-        <input type="checkbox" name="name" value="" /> 未绑定营销员，不允许查看二维码图片。</p>
-    <p>
-        <input type="checkbox" name="name" value="" /> 列表上添加关联营销员功能。</p>
+    <div class="alert alert-success">未绑定营销员，不允许查看二维码图片。</div>
     <div class="panel panel-title">
         <p style="font-weight:bold;"><a href="QRCodeNew.aspx">添加</a></p>
     </div>

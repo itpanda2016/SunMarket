@@ -34,6 +34,7 @@
         <li <%if (activeMenu.IndexOf("SalerList.aspx") >= 0 || activeMenu.IndexOf("SalerNew.aspx") >= 0) { %> class="active" <% }%>><a href="SalerList.aspx">营销员管理</a></li>
         <li <%if (activeMenu.IndexOf("QRCodeList.aspx") >= 0 || activeMenu.IndexOf("QRCodeNew.aspx") >= 0) { %> class="active" <% }%>><a href="QRCodeList.aspx">二维码管理</a></li>
         <li <%if (activeMenu.IndexOf("CustomerList.aspx") >= 0 || activeMenu.IndexOf("CustomerList.aspx") >= 0) { %> class="active" <% }%>><a href="CustomerList.aspx">粉丝管理</a></li>
+        <li <%if (activeMenu.IndexOf("CustomerAmount.aspx") >= 0 || activeMenu.IndexOf("CustomerAmount.aspx") >= 0) { %> class="active" <% }%>><a href="CustomerAmount.aspx">报表统计</a></li>
       </ul>
 
         <%--<ul class="nav navbar-nav">
@@ -59,7 +60,7 @@
           <a href="/My" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <%--<li><a href="Profile.aspx">修改密码</a></li>--%>
-            <li><a href="#">修改密码</a></li>
+            <li><a href="../../Notes.aspx">开发日志</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="Login.aspx?act=logout">退出登录</a></li>
           </ul>
