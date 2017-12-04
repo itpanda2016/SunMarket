@@ -46,6 +46,26 @@ namespace SaleQRCode {
             return null;
         }
         /// <summary>
+        /// 暂时只返回nickname
+        /// </summary>
+        /// <param name="openid"></param>
+        /// <returns></returns>
+        public static Customer Get(string openid) {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("select openid,nickname,saler_id" +
+                " from crm_customer where openid = {0}", openid);
+            SqlDataReader reader = MsSQLHelper.ExecuteReader(sb.ToString());
+            Customer model = new Customer();
+            if (reader.Read()) {
+                model.Openid = openid;
+                model.NickName = reader["nickname"].ToString();
+                model.SalerId = Convert.ToInt32(reader["saler_id"]);
+                return model;
+            }
+            return null;
+        }
+
+        /// <summary>
         /// 根据ID（营销员）统计粉丝记录
         /// </summary>
         /// <param name="id"></param>

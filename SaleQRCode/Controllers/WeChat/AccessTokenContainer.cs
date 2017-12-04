@@ -38,7 +38,6 @@ public class AccessTokenContainer {
             expires.InnerText = DateTime.Now.AddSeconds(tokenOK.expires_in).ToString("yyyy-MM-dd HH:mm:ss");
             xml.Save(HttpContext.Current.Server.MapPath("/App_Data/AccessToken.xml"));
             return access_token.InnerText;
-
         }
         /// <summary>
         /// 根据expires判断access_token是否可用

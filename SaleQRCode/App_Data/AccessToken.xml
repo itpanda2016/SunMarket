@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <WeChat>
-  <AccessToken>rwUFQC4Gm03mNqpZEbNGveEtBQBrFSm6-KMWCgZCP_La-IHTzXNUyRlKXGDss1l4_FQFGMUDN5gqCeM6n1Z1hTxQFcpQkBIgmFtSs81GVPXCzbWXFUx7vxvEMWIjK6W0BTWdADAGYB</AccessToken>
+  <AccessToken>kop0lvkVN18pa8jua2G79itUbPBAnAul6B6Z_XDQN7r9Ry-oD5N979KD0zpkVYA9PqIuIX6tZVnQoTd0Z3XZHo2Vd2tlslk5M8oCFoQcfgzNzBJglCRBmS8Aa0zTcM1rEHIhADAILM</AccessToken>
   <!--expires_in 是时间格式-->
-  <Expires>2017-11-23 22:39:31</Expires>
+  <Expires>2017-12-03 17:51:21</Expires>
+  <Password>weizhi123</Password>
 </WeChat>

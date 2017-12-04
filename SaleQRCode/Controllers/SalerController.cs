@@ -77,6 +77,31 @@ namespace SaleQRCode {
             }
             return null;
         }
+        /// <summary>
+        /// 根据openid，从customer拿到saler_id，再获取具体的saler详细信息
+        /// </summary>
+        /// <param name="openid"></param>
+        /// <returns></returns>
+        public static Saler Get(string openid) {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("select b.name,b.mobile from crm_customer as a left join crm_saler as b on a.saler_id=b.id where a.openid = {0}", openid);
+            SqlDataReader reader = MsSQLHelper.ExecuteReader(sb.ToString());
+            Saler model = new Saler();
+            if (reader.Read()) {
+                //model.Id = openid;
+                model.Name = reader["name"].ToString();
+                model.Status = Convert.ToInt32(reader["status"]);
+                model.Mobile = reader["mobile"].ToString();
+                model.GMTCreate = Convert.ToDateTime(reader["gmt_create"]);
+                if (reader["qrcode_id"] != DBNull.Value)
+                    model.QRCodeId = Convert.ToInt32(reader["qrcode_id"]);
+                if (reader["gmt_modified"] != DBNull.Value)
+                    model.GMTModified = Convert.ToDateTime(reader["gmt_modified"]);
+                return model;
+            }
+            return null;
+        }
+
         public static int GetId(int qrcodeId) {
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("select id" +

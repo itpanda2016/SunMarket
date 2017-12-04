@@ -8,6 +8,9 @@ using System.Data;
 using FROST.Utility;
 using System.Text;
 using FROST.WeixinMP;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using System.IO;
 
 namespace SaleQRCode {
     public partial class CustomerAmount : System.Web.UI.Page {
@@ -28,28 +31,32 @@ namespace SaleQRCode {
             sb.Append(" and b.openid <> ''");
             if (openid != "")
                 sb.Append(" and b.openid = '" + openid + "'");
-            sb.Append(" order by order_id desc");
+            sb.Append(" order by a.order_id desc");
             dt = DbHelperMySQL.Query(sb.ToString()).Tables[0];
             if (dt != null) {
-                dt.Columns.Add("ordertime", typeof(string));
+                dt.Columns.Add("订单日期", typeof(string));
                 dt.Columns.Add("订单状态", typeof(string));
                 dt.Columns.Add("支付状态", typeof(string));
                 for (int i = 0; i < dt.Rows.Count; i++) {
-                    dt.Rows[i]["ordertime"] = General.UnixTimeToTime(dt.Rows[i]["add_time"].ToString()).ToString();
+                    dt.Rows[i]["订单日期"] = General.UnixTimeToTime(dt.Rows[i]["add_time"].ToString()).ToString();
                     dt.Rows[i]["订单状态"] = (OrderStatus)Convert.ToInt32(dt.Rows[i]["order_status"]);
                     dt.Rows[i]["支付状态"] = (PayStatus)Convert.ToInt32(dt.Rows[i]["pay_status"]);
-                    //if (Convert.ToInt32(dt.Rows[i]["order_status"]) == 1)
-                    //    dt.Rows[i]["订单状态"] = "已确认";
-                    //if (Convert.ToInt32(dt.Rows[i]["order_status"]) == 2)
-                    //    dt.Rows[i]["订单状态"] = "已取消";
-                    //if (Convert.ToInt32(dt.Rows[i]["order_status"]) == 5)
-                    //    dt.Rows[i]["订单状态"] = "已收货";
-                    //if (Convert.ToInt32(dt.Rows[i]["order_status"]) == 4)
-                    //    dt.Rows[i]["订单状态"] = "已退货";
-                    //if (Convert.ToInt32(dt.Rows[i]["pay_status"]) == 0)
-                    //    dt.Rows[i]["支付状态"] = "未支付";
-                    //if (Convert.ToInt32(dt.Rows[i]["pay_status"]) == 2)
-                    //    dt.Rows[i]["支付状态"] = "已付款";
+                }
+                if (!string.IsNullOrEmpty(Request["action"])) {
+                    XSSFWorkbook workbook;
+                    using (FileStream file = new FileStream(Server.MapPath("~/App_Data/订单导出模板.xlsx"),FileMode.Open,FileAccess.Read)) {
+                        workbook = new XSSFWorkbook(file);
+                    }
+                    ISheet sheet = workbook.GetSheetAt(0);  //应该是从0开始？
+                    for (int i = 0; i < dt.Rows.Count; i++) {
+                        IRow row = sheet.CreateRow(i + 1);
+                        for (int k = 0; k < dt.Columns.Count; k++) {
+                            ICell cell = row.CreateCell(k);
+                            cell.SetCellValue(dt.Rows[i][k].ToString());
+                        }
+                    }
+                    NpoiHelper.DataTableToExcel(dt, Server.MapPath("~/App_Data/" + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")), ExcelVersion.xlsx);
+                    Message.Dialog("导出成功。");
                 }
                 rptList.DataSource = dt;
                 rptList.DataBind();

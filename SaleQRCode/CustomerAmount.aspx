@@ -20,7 +20,6 @@
         }
     %>--%>
 
-
     <asp:Repeater ID="rptList" runat="server">
         <HeaderTemplate>
             <div class="panel panel-success">
@@ -33,6 +32,7 @@
                             <input type="datetime" class="form-control" name="endTime" />
                         </div>
                         <input type="submit" class="btn btn-success" name="btnSubmit" value="查询" />
+                        <input type="button" class="btn btn-primary" name="btnExport" onclick="javascript: window.location.href ='/HandlerExportExcel.ashx?action=export&id=<%=openid%>';" value="导出Excel" />
                     </form>
                 </div>
                 <table class="table table-bordered">
@@ -49,7 +49,7 @@
         </HeaderTemplate>
         <ItemTemplate>
             <tr>
-                <td><%# Eval("ordertime") %></td>
+                <td><%# Eval("订单日期") %></td>
                 <td><%# Eval("user_id") %></td>
                 <td><%# Eval("openid") %></td>
                 <td><%# Eval("order_id") %></td>
