@@ -93,6 +93,7 @@
     <Content Include="Controllers\WeChat\HandlerIO.ashx" />
     <Content Include="App_Data\订单导出模板.xlsx" />
     <Content Include="HandlerExportExcel.ashx" />
+    <Content Include="HandlerTest.ashx" />
     <None Include="packages.config" />
     <Content Include="CustomerAmount.aspx" />
     <Content Include="CustomerList.aspx" />
@@ -169,6 +170,9 @@
     </Compile>
     <Compile Include="HandlerExportExcel.ashx.cs">
       <DependentUpon>HandlerExportExcel.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="HandlerTest.ashx.cs">
+      <DependentUpon>HandlerTest.ashx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
